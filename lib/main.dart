@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'Input.dart';
+import 'Result.dart';
+import 'Convert.dart';
 
 void main() {
   runApp(MyApp());
@@ -39,44 +42,9 @@ class _MyAppState extends State<MyApp> {
           margin: EdgeInsets.all(8),
           child: Column(
             children: [
-              TextFormField(
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9+\.,]')),
-                ],
-                controller: suhu,
-                decoration:
-                InputDecoration(hintText: 'Masukkan suhu Dalam Celcius'),
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text("Suhu dalam Kelvin",
-                            style: TextStyle(height: 1.5, fontSize: 20)),
-                        Text("$_kelvin"),
-                      ],
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text("Suhu dalam Reamur",
-                            style: TextStyle(height: 1.5, fontSize: 20)),
-                        Text("$_reamur"),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              RaisedButton(
-                onPressed: _hitungSuhu,
-                color: Colors.blue,
-                textColor: Colors.white,
-                child: Text('Konversi Suhu'),
-              ),
+              Input(suhu: suhu),
+              Result(kelvin: _kelvin, reamur: _reamur),
+              Convert(konvertHandler: _hitungSuhu),
             ],
           ),
         ),
